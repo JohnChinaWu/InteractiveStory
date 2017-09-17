@@ -1,9 +1,11 @@
-package com.johnwu1016.interactivestory;
+package com.johnwu1016.interactivestory.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.johnwu1016.interactivestory.R;
 
 public class StoryActivity extends AppCompatActivity {
     public static String TAG = StoryActivity.class.getSimpleName();
