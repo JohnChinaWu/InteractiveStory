@@ -4,9 +4,31 @@ public class Page {
     private int imageId;
     private int textId;
     private Choice choice1, choice2;
+    private boolean isFianlPage = false;
+
+    public Page(int imageId, int textId) {
+        this.imageId = imageId;
+        this.textId = textId;
+        isFianlPage = true;
+    }
+
+    public Page(int imageId, int textId, Choice choice1, Choice choice2) {
+        this.imageId = imageId;
+        this.textId = textId;
+        this.choice1 = choice1;
+        this.choice2 = choice2;
+    }
 
     public int getImageId() {
         return imageId;
+    }
+
+    public boolean isFianlPage() {
+        return isFianlPage;
+    }
+
+    public void setFianlPage(boolean fianlPage) {
+        isFianlPage = fianlPage;
     }
 
     public void setImageId(int imageId) {
