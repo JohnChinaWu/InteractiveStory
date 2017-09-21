@@ -15,6 +15,8 @@ import com.johnwu1016.interactivestory.R;
 import com.johnwu1016.interactivestory.model.Page;
 import com.johnwu1016.interactivestory.model.Story;
 
+import java.util.Stack;
+
 public class StoryActivity extends AppCompatActivity {
     public static String TAG = StoryActivity.class.getSimpleName();
     private Story story;
@@ -23,15 +25,16 @@ public class StoryActivity extends AppCompatActivity {
     private Button choice1Button;
     private Button choice2Button;
     private String name;
+    private Stack<Integer> pageStack = new Stack<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story);
         storyImageView = (ImageView) findViewById(R.id.storyImageView);
-        storyTextView = (TextView)findViewById(R.id.storyTextView);
-        choice1Button = (Button)findViewById(R.id.choice1Button);
-        choice2Button = (Button)findViewById(R.id.choice2Button);
+        storyTextView = (TextView) findViewById(R.id.storyTextView);
+        choice1Button = (Button) findViewById(R.id.choice1Button);
+        choice2Button = (Button) findViewById(R.id.choice2Button);
 
         Intent intent = getIntent();
         name = intent.getStringExtra(getString(R.string.key_name));
@@ -45,6 +48,7 @@ public class StoryActivity extends AppCompatActivity {
     }
 
     private void loadPage(int pageNumber) {
+        pageStack.push(pageNumber);
         final Page page = story.getPage(pageNumber);
 
         Drawable image = ContextCompat.getDrawable(this, page.getImageId());
@@ -91,5 +95,12 @@ public class StoryActivity extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    public void onBackPressed() {
+        pageStack.pop();
+        if (pageStack.isEmpty())
+            super.onBackPressed();
+        else
+            loadPage(pageStack.pop());
+    }
 }
